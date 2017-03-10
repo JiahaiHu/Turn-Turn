@@ -1,0 +1,647 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+i {
+	font-style: normal;
+}
+
+li {
+	list-style: none;
+}
+
+html, body {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	font-family: SHOWG,zzgf_normal;
+	color: #FFFFFF;
+	-webkit-tap-highlight-color: transparent;
+}
+
+@font-face {
+	font-family: SHOWG;
+	src: url("SHOWG.ttf");
+}
+
+@font-face {
+	font-family: zzgf_normal;
+	src: url("zzgf_normal.otf");
+}
+
+@font-face {
+	font-family: zzgf_thin;
+	src: url("zzgf_thin.otf");
+}
+
+#load {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: #ADDCE6;
+	z-index: 1;
+	overflow: hidden;
+}
+
+#canvas-1 {
+	display: block;
+	position: relative;
+	left: -13%;
+	border: none;
+	z-index: 1;
+	margin: -14% auto;
+	height: 242px;
+	width: 487px;
+	transform: rotate(-10deg);
+	-webkit-transform: rotate(-10deg);
+	-moz-transform: rotate(-10deg);
+	-ms-transform: rotate(-10deg);
+}
+
+#global {
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	width: 83%;
+	transform-origin: 50% 48%;
+	animation: spin 12s linear infinite;
+	-webkit-animation: spin 12s linear infinite;
+	-moz-animation: spin 12s linear infinite;
+	-ms-animation: spin 12s linear infinite;
+}
+
+#tree_above {
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	width: 83%;
+	transform-origin: 50% 48%;
+	z-index: 2;
+	animation: spin 12s linear infinite;
+	-webkit-animation: spin 12s linear infinite;
+	-moz-animation: spin 12s linear infinite;
+	-ms-animation: spin 12s linear infinite;
+}
+
+.load-main {
+	position: absolute;
+	top: 70%;
+	width: 100%;
+	height: 1%;
+}
+
+.load-count {
+	text-align: center;
+	color: #FFFFFF;
+}
+
+.load-bar {
+	position: relative;
+	width: 40%;
+	height: 100%;
+	margin: 2% auto;
+}
+
+#loading {
+	height: 100%;
+	width: 0%;
+	background-color: #FFFFFF;
+	border: 1px solid #FFC125;
+	border-radius: 4px;
+	transition: all 5s ease-out;
+}
+
+@keyframes load-one {
+	100% {width: 30%;}
+}
+
+@-webkit-keyframes load-one {
+	100% {width: 30%;}
+}
+
+@-moz-keyframes load-one {
+	100% {width: 30%;}
+}
+
+@-o-keyframes load-one {
+	100% {width: 30%;}
+}
+
+@keyframes load-two {
+	100% {width: 60%;}
+}
+
+@-webkit-keyframes load-two {
+	100% {width: 60%;}
+}
+
+@-moz-keyframes load-two {
+	100% {width: 60%;}
+}
+
+@-o-keyframes load-two {
+	100% {width: 60%;}
+}
+
+@keyframes load-three {
+	100% {width: 100%;}
+}
+
+@-webkit-keyframes load-three {
+	100% {width: 100%;}
+}
+
+@-moz-keyframes load-three {
+	100% {width: 100%;}
+}
+
+@-o-keyframes load-three {
+	100% {width: 100%;}
+}
+
+@keyframes spin {
+	50% {
+		transform: rotate(-180deg);
+		-webkit-transform: rotate(-180deg);
+		-moz-transform:rotate(-180deg);
+    	-ms-transform:rotate(-180deg);
+	}
+	100% {
+		transform: rotate(-360deg);
+		-webkit-transform: rotate(-360deg);
+		-moz-transform:rotate(-360deg);
+    	-ms-transform:rotate(-360deg);
+	}
+}
+
+@-webkit-keyframes spin {
+	50% {
+		transform: rotate(-180deg);
+		-webkit-transform: rotate(-180deg);
+		-moz-transform:rotate(-180deg);
+    	-ms-transform:rotate(-180deg);
+	}
+	100% {
+		transform: rotate(-360deg);
+		-webkit-transform: rotate(-360deg);
+		-moz-transform:rotate(-360deg);
+    	-ms-transform:rotate(-360deg);
+	}
+}
+
+@-moz-keyframes spin {
+	50% {
+		transform: rotate(-180deg);
+		-webkit-transform: rotate(-180deg);
+		-moz-transform:rotate(-180deg);
+    	-ms-transform:rotate(-180deg);
+	}
+	100% {
+		transform: rotate(-360deg);
+		-webkit-transform: rotate(-360deg);
+		-moz-transform:rotate(-360deg);
+    	-ms-transform:rotate(-360deg);
+	}
+}
+
+@-o-keyframes spin {
+	50% {
+		transform: rotate(-180deg);
+		-webkit-transform: rotate(-180deg);
+		-moz-transform:rotate(-180deg);
+    	-ms-transform:rotate(-180deg);
+	}
+	100% {
+		transform: rotate(-360deg);
+		-webkit-transform: rotate(-360deg);
+		-moz-transform:rotate(-360deg);
+    	-ms-transform:rotate(-360deg);
+	}
+}
+
+#home {
+	position: relative;
+	background-color: #DDDDDD;
+	height: 100%;
+	overflow: hidden;
+	z-index: 1;
+	opacity: 0;
+	transition: all .5s ease-out;
+}
+
+#canvas-2 {
+	position: absolute;
+	width: 150px;
+	height: 75px;
+	border: none;
+	bottom: 9%;
+	transform-origin: 0% 100%;
+	transform: scale(3);
+	-webkit-transform: scale(3);
+	-moz-transform: scale(3);
+	-ms-transform: scale(3);
+}
+
+.home-content {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	transition: all 1s ease-out;
+	transform: translateY(-100%);
+	-webkit-transform: translateY(-100%);
+	-moz-transform: translateY(-100%);
+	-ms-transform: translateY(-100%);
+}
+
+@keyframes drop-in {
+	0% {top: -100%;}
+	80% {top: 2%;}
+	90% {top: -1%;}
+	100% {top: 0%;}
+}
+
+@-webkit-keyframes drop-in {
+	0% {top: -100%;}
+	80% {top: 2%;}
+	90% {top: -1%;}
+	100% {top: 0%;}
+}
+
+@-moz-keyframes drop-in {
+	0% {top: -100%;}
+	80% {top: 2%;}
+	90% {top: -1%;}
+	100% {top: 0%;}
+}
+
+@-o-keyframes drop-in {
+	0% {top: -100%;}
+	80% {top: 2%;}
+	90% {top: -1%;}
+	100% {top: 0%;}
+}
+
+@keyframes drop-out {
+	10% {top: 9%}
+	100% {top: 100%}
+}
+
+@-webkit-keyframes drop-out {
+	10% {top: 9%}
+	100% {top: 100%}
+}
+
+@-moz-keyframes drop-out {
+	10% {top: 9%}
+	100% {top: 100%}
+}
+
+@-o-keyframes drop-out {
+	10% {top: 9%}
+	100% {top: 100%}
+}
+
+@keyframes start-drop-out {
+	10% {top: 50%}
+	100% {top: 130%}
+}
+
+@-webkit-keyframes start-drop-out {
+	10% {top: 50%}
+	100% {top: 130%}
+}
+
+@-moz-keyframes start-drop-out {
+	10% {top: 50%}
+	100% {top: 130%}
+}
+
+@-o-keyframes start-drop-out {
+	10% {top: 50%}
+	100% {top: 130%}
+}
+
+@keyframes body-drop-out {
+	10% {top: 34%}
+	100% {top: 114%}
+}
+
+@keyframes hand-drop-out {
+	10% {top: 48%}
+	100% {top: 128%}
+}
+
+#game-name {
+	position: absolute;
+	top: 10%;
+	width: 100%;
+	text-align: center;
+	z-index: 2;
+}
+
+.home-btn {
+	width: 100%;
+	text-align: center;
+	margin-top: 200px;
+}
+
+.home-btn-item {
+	position: absolute;
+	width: 100%;
+	margin: 0 auto;
+}
+
+#start-btn {
+	top: 51%;
+}
+
+#time-set {
+	position: absolute;
+	top: 10%;
+	width: 100%;
+	text-align: center;
+}
+
+#time-1 {
+	top: 40%;
+	z-index: 3;
+}
+
+#time-2 {
+	top: 50%;
+	z-index: 2;
+}
+
+#time-3 {
+	top: 60%;
+	z-index: 1;
+}
+
+@keyframes one-drop-out {
+	10% {top: 39%}
+	100% {top: 120%}
+}
+
+@-webkit-keyframes one-drop-out {
+	10% {top: 39%}
+	100% {top: 120%}
+}
+
+@-moz-keyframes one-drop-out {
+	10% {top: 39%}
+	100% {top: 120%}
+}
+
+@-o-keyframes one-drop-out {
+	10% {top: 39%}
+	100% {top: 120%}
+}
+
+@keyframes two-drop-out {
+	10% {top: 49%}
+	100% {top: 130%}
+}
+
+@-webkit-keyframes two-drop-out {
+	10% {top: 49%}
+	100% {top: 130%}
+}
+
+@-moz-keyframes two-drop-out {
+	10% {top: 49%}
+	100% {top: 130%}
+}
+
+@-o-keyframes two-drop-out {
+	10% {top: 49%}
+	100% {top: 130%}
+}
+
+@keyframes three-drop-out {
+	10% {top: 59%}
+	100% {top: 140%}
+}
+
+@-webkit-keyframes three-drop-out {
+	10% {top: 59%}
+	100% {top: 140%}
+}
+
+@-moz-keyframes three-drop-out {
+	10% {top: 59%}
+	100% {top: 140%}
+}
+
+@-o-keyframes three-drop-out {
+	10% {top: 59%}
+	100% {top: 140%}
+}
+
+@keyframes go {
+	0% {left: -50%}
+	100% {left: 100%}
+}
+
+@-webkit-keyframes go {
+	0% {left: -50%}
+	100% {left: 100%}
+}
+
+@-moz-keyframes go {
+	0% {left: -50%}
+	100% {left: 100%}
+}
+
+@-o-keyframes go {
+	0% {left: -50%}
+	100% {left: 100%}
+}
+
+#game {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 100%;
+	top: 0;
+	background-color: #ADDCE6;
+	transition: all 1s ease-out;
+	text-align: center;
+	font-size: 2em;
+	background-image: url(images/game_bg.jpg);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.game-header {
+	position: relative;
+	display: box;
+	display: -webkit-box;
+	display: -moz-box;
+	text-shadow: 4px 4px 1px #79CDCD;
+}
+
+.game-header img {
+	height: 20%;
+	margin-top: 20%;
+}
+
+.game-time {
+	position: relative;
+	width: 100%;
+	box-flex: 1;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+}
+
+.game-step {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	box-flex: 1;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+}
+
+#rank {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 100%;
+	top: 0;
+	background-color: #ADDCE6;
+	transition: all 1s ease-out;
+	text-align: center;
+	font-size: 2em;
+	background-image: url(images/game_bg.jpg);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	transition: all 1s ease-out;
+	z-index: 234;
+}
+
+.rank-header {
+	width: 100%;
+	height: 10%;
+	font-size: 5em;
+	margin: 10% auto;
+}
+
+.rank-list {
+	position: relative;
+	height: 80%;
+	width: 100%;
+	font-size: 2.2em;
+	line-height: 2.2em;
+}
+
+.rank-item {
+	position: relative;
+	width: 80%;
+	height: 11%;
+	margin: 8% auto;
+}
+
+#rank-1 {
+	background-image: url(images/rank_1.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+#rank-1::before {
+	content: " ";
+	display: inline-block;
+	position: absolute;
+	width: 12%;
+	height: 48%;
+	left: 5%;
+	top: 28%;
+	background-image: url(images/rank_first.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+#rank-2 {
+	background-image: url(images/rank_2.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+#rank-2::before {
+	content: "2";
+	display: inline-block;
+	position: absolute;
+	width: 12%;
+	height: 48%;
+	left: 5%;
+	top: 4%;
+}
+
+#rank-3 {
+	background-image: url(images/rank_3.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+#rank-3::before {
+	content: "3";
+	display: inline-block;
+	position: absolute;
+	width: 12%;
+	height: 48%;
+	left: 5%;
+	top: 4%;
+}
+
+#rank-4 {
+	background-image: url(images/rank_more.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+#rank-4::before {
+	content: "4";
+	display: inline-block;
+	position: absolute;
+	width: 12%;
+	height: 48%;
+	left: 5%;
+	top: 4%;
+}
+
+#rank-5{
+	background-image: url(images/rank_more.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+#rank-5::before {
+	content: "5";
+	display: inline-block;
+	position: absolute;
+	width: 12%;
+	height: 48%;
+	left: 5%;
+	top: 4%;
+}
+
+.rank-id {
+	display: inline-block;
+	position: absolute;
+	margin: auto 0;
+	left: 20%;
+}
+
+.rank-score {
+	display: inline-block;
+	position: absolute;
+	margin: auto 0;
+	right: 10%;
+}
+
+.rank-btn {
+	position: absolute;
+	bottom: 5%;
+	right: 10%;
+}

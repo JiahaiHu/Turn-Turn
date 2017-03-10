@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<mata name="viewport" content="width=device-width,height=device-height,initial-scale=1,maximum-scale=1.0,user-scalable=0"></mata>
+<title>TURN TURN</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<link rel="stylesheet" href="css/index.css"/>
+<script type="text/javascript" src="js/createjs-2015.11.26.min.js"></script>
+<script id="order" src='js/l.js'></script>
+<script type="text/javascript">
+
+		var count = 0;
+
+		function loadNum(){
+			if (count < 30) {
+				setTimeout("loadNum()",2);
+				count += 1;
+				load_num.innerHTML = count;
+			}
+			else if (count == 30)
+				return true;
+			else if (count > 30 && count < 60) {
+				setTimeout("loadNum()",2);
+				count += 1;
+				load_num.innerHTML = count;
+			}
+			else if (count == 60)
+				return true;
+			else if (count > 60 && count < 100) {
+				setTimeout("loadNum()",2);
+				count += 1;
+				load_num.innerHTML = count;
+			}
+			else if (count == 100)
+				return true;
+		};
+</script>
+</head>
+<body onresize="map();player_fix();">
+<div id="load">
+	<div style="position: absolute; top: 20%; width: 100%;">
+		<div style="position: absolute;width: 100%; top: 56%;">
+			<img id="global" src="images/global.png">
+		</div>
+		<div style="position: absolute;width: 100%; top: 56%;">
+			<img id="tree_above" src="images/tree_above.png">
+		</div>
+		<iframe id="canvas-1" src="loading/loading.html" scrolling="no"></iframe>
+	</div>
+	<div class="load-main">
+		<div class="load-count" style="font-size: 3em;"><span id="load-num">0</span>%</div>
+		<div class="load-bar">
+			<div id="loading"></div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var loading = document.getElementById("loading");
+	var load_num = document.getElementById("load-num");
+	loading.style.animation = "load-one 0.06s ease-in forwards 1";
+	loading.style.webkitAnimation = "load-one 0.06s ease-in forwards 1";
+	loadNum();
+</script>
+<div id="home">
+	<img id="bg-1" src="images/bg_1.jpg" style="position: absolute;width: 100%; transition: opacity .5s ease-out;">
+	<div id="bg-2" style="position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity .5s ease-out;">
+		<img src="images/bg_2.png" style="display: block; width: 100%; height: 100%;">
+		<iframe id="canvas-2" src="time_set/time_set.html"></iframe>
+	</div>
+	<div id="home-content-1" class="home-content">
+		<div id="game-name">
+			<img src="images/game_name.png" style="width: 80%;">
+		</div>
+		<div class="home-btn">
+			<div id="body" class="home-btn-item" style="top: 35%">
+				<img src="images/body.png" style="width: 30%; transition: opacity .5s ease-out;">
+			</div>
+			<div id="hand-l" class="home-btn-item" style="top: 49%; z-index: 1;">
+				<img src="images/hand.png" style="position: relative; width: 7%; left: -12%; transition: opacity .5s ease-out;">
+			</div>
+			<div id="hand-r" class="home-btn-item" style="top: 49%; z-index: 1;">
+				<img src="images/hand.png" style="position: relative; width: 7%; right: -12%; transform: scaleX(-1);">
+			</div>
+			<div id="start-btn" class="home-btn-item">
+				<img id="start" src="images/start.png" style="width: 50%;">
+			</div>
+		</div>
+	</div>
+	<div id="home-content-2" class="home-content">
+		<div id="time-set">
+			<img src="images/time_set.png" style="width: 60%;">
+		</div>
+		<div class="home-btn">
+			<div id="time-1" class="home-btn-item">
+				<img id="btn-1" src="images/1min.png" style="width: 30%;">
+			</div>
+			<div id="time-2" class="home-btn-item">
+				<img id="btn-2" src="images/3min.png" style="width: 34%;">
+			</div>
+			<div id="time-3" class="home-btn-item">
+				<img id="btn-3" src="images/5min.png" style="width: 34%;">
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		loading.style.animation = "load-two 0.06s ease-in forwards 1";
+		loading.style.webkitAnimation = "load-two 0.06s ease-in forwards 1";
+		count = 31;
+		loadNum();		
+	</script>
+	<div id="game">
+		<div class="game-header">
+			<div class="game-time">
+				<img src="images/game_time.png">
+				<div>
+					<span>0</span><span id="minute">1</span>:<span id="second">00</span>
+				</div>
+			</div>
+			<div class="game-step">
+				<img src="images/game_step.png" style="display: block; margin: 20% auto 0 auto;">
+				<div id="step">0</div>
+			</div>
+		</div>
+		<div id="island">
+			<img src="images/game_island.png" style="position: absolute;top: 0;left:50%;margin-left: -445px;width: 890px;height: 1190px
+			">
+		    <div id="player">
+		        <div id="animation_container" style="background-color:rgba(255, 255, 255, 0.00); width:75%; height:100%">
+		            <canvas id="canvas" width="75%" height="100%" style="position: absolute; display: block; background-color:rgba(255, 255, 255, 0.00);left:-80%;top:-100%"></canvas>
+		            <div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:75px; height:100px; position: absolute; left: 0px; top: 0px; display: block;">
+		            </div>
+		        </div>
+		    </div>
+		    <div class="island-line" id="top">
+		        <div class="island-cube" id="Top-Left">
+		            <div class="one face" ></div>
+		            <div class="two face" ></div>
+		            <div class="three face" ></div>
+		            <div class="four face" ></div>
+		            <div class="five face" ></div>
+		            <div class="six face" ></div>
+		        </div>
+		        <div class="island-cube" id="Top-Center">
+		            <div class="one face" ></div>
+		            <div class="two face" ></div>
+		            <div class="three face" ></div>
+		            <div class="four face" ></div>
+		            <div class="five face" ></div>
+		            <div class="six face" ></div>
+		        </div>
+		        <div class="island-cube" id="Top-Right">
+		            <div class="one face" ></div>
+		            <div class="two face" ></div>
+		            <div class="three face" ></div>
+		            <div class="four face" ></div>
+		            <div class="five face" ></div>
+		            <div class="six face" ></div>
+		        </div>
+		    </div>
+		    <div class="island-line" id="middle">
+		        <div class="island-cube" id='Middle-Left'>
+		            <div class="one face" ></div>
+		            <div class="two face" ></div>
+		            <div class="three face" ></div>
+		            <div class="four face" ></div>
+		            <div class="five face" ></div>
+		            <div class="six face" ></div>
+		        </div>
+		        <div class="island-cube" id="Middle-Center">
+		            <div class="one face" ></div>
+		            <div class="two face" ></div>
+		            <div class="three face" ></div>
+		            <div class="four face" ></div>
+		            <div class="five face" ></div>
+		            <div class="six face" ></div>
+		        </div>
+		        <div class="island-cube" id="Middle-Right">
+		            <div class="one face" ></div>
+		            <div class="two face" ></div>
+		            <div class="three face" ></div>
+		            <div class="four face" ></div>
+		            <div class="five face" ></div>
+		            <div class="six face" ></div>
+		        </div>
+		    </div>
+		    <div class="island-line" id="bottom">
+		        <div class="island-cube" id="Bottom-Left">
+		            <div class="one face" ></div>
+		            <div class="two face" ></div>
+		            <div class="three face" ></div>
+		            <div class="four face" ></div>
+		            <div class="five face" ></div>
+		            <div class="six face" ></div>
+		        </div>
+		        <div class="island-cube" id="Bottom-Center">
+		            <div class="one face" ></div>
+		            <div class="two face" ></div>
+		            <div class="three face" ></div>
+		            <div class="four face" ></div>
+		            <div class="five face" ></div>
+		            <div class="six face" ></div>
+		        </div>
+		        <div class="island-cube" id="Bottom-Right">
+		            <div class="one face" ></div>
+		            <div class="two face" ></div>
+		            <div class="three face" ></div>
+		            <div class="four face" ></div>
+		            <div class="five face" ></div>
+		            <div class="six face" ></div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+	<div id="rank">
+		<div class="rank-header">
+			<div class="rank-title">RANK</div>
+		</div>
+		<div class="rank-list">
+			<div id="rank-1" class="rank-item">
+				<div class="rank-id">XXXXX</div>
+				<div class="rank-score">100</div>
+			</div>
+			<div id="rank-2" class="rank-item">
+				<div class="rank-id">XXXXX</div>
+				<div class="rank-score">100</div>
+			</div>
+			<div id="rank-3" class="rank-item">
+				<div class="rank-id">XXXXX</div>
+				<div class="rank-score">100</div>
+			</div>
+			<div id="rank-4" class="rank-item">
+				<div class="rank-id">XXXXX</div>
+				<div class="rank-score">100</div>
+			</div>
+			<div id="rank-5" class="rank-item">
+				<div class="rank-id">XXXXX</div>
+				<div class="rank-score">100</div>
+			</div>
+		</div>
+		<div class="rank-btn">
+			<a href="">
+				<img src="images/btn.png">
+			</a>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+var contents = document.getElementsByClassName("home-content");
+var home = document.getElementById("home");
+var bg_1 = document.getElementById("bg-1");
+var bg_2 = document.getElementById("bg-2");
+var canvas_2 = document.getElementById("canvas-2");
+var rankdiv = document.getElementById("rank");
+		var tms = 0;
+
+		function timing() {
+				tms -= 1000;
+				var m = Math.floor(tms/(1000*60)) % 60;
+				var s = Math.floor(tms/1000) % 60;
+				if (m < 0)
+					m = 0;
+				if (s < 0)
+					s = 0;
+				document.getElementById("minute").innerHTML = m; 
+				if (s > 9)
+					document.getElementById("second").innerHTML = s; 
+				else
+					document.getElementById("second").innerHTML = "0" + s.toString();
+			if (m != 0 || s != 0)
+				setTimeout("timing()",1000);
+			else{
+				alert("Game Over!");
+				rankdiv.style.left="0";
+				var cut1=cut+1;
+				rank_show(eval('rank_'+cut1));
+			}
+		};
+
+
+window.onload =function(){
+	isPC();map();hover();init();player_fix();
+	loading.style.animation = "load-three 0.06s ease-in forwards 1";
+	loading.style.webkitAnimation = "load-three 0.06s ease-in forwards 1";
+	count = 61;
+	loadNum();
+	setTimeout(function() {
+		home.style.opacity = "1";
+		contents[0].style.transform = "translateY(0)";
+		contents[0].style.webkitTransform = "translateY(0)";
+		contents[0].style.animation = "drop-in 1.6s ease-out forwards 1";
+		contents[0].style.webkitAnimation = "drop-in 1.6s ease-out forwards 1";
+	},1000);
+}
+
+//home-content-1
+var game_name = document.getElementById("game-name");
+var start_btn = document.getElementById("start-btn");
+var start = document.getElementById("start");
+var body = document.getElementById("body");
+var hand_l = document.getElementById("hand-l");
+var hand_r = document.getElementById("hand-r");
+
+start.onclick = function() {
+	start_btn.style.animation = "start-drop-out 1s ease-in forwards 1";
+	start_btn.style.webkitAnimation = "start-drop-out 1s ease-in forwards 1";
+	setTimeout(function(){
+		body.style.animation = "body-drop-out 1s ease-in forwards 1";
+		body.style.webkitAnimation = "body-drop-out 1s ease-in forwards 1";
+		hand_l.style.animation = "hand-drop-out 1s ease-in forwards 1";
+		hand_l.style.webkitAnimation = "hand-drop-out 1s ease-in forwards 1";
+		hand_r.style.animation = "hand-drop-out 1s ease-in forwards 1";
+		hand_r.style.webkitAnimation = "hand-drop-out 1s ease-in forwards 1";
+	},100);
+	setTimeout(function(){
+		game_name.style.animation = "drop-out 1s ease-in forwards 1";
+		game_name.style.webkitAnimation = "drop-out 1s ease-in forwards 1";
+	},200);
+	setTimeout(function(){
+		bg_2.style.opacity = "1";
+		bg_1.style.opacity = "0";
+		document.getElementById("body").style.opacity = "0";
+		document.getElementById("hand-l").style.opacity = "0";
+		document.getElementById("hand-r").style.opacity = "0";
+		canvas_2.style.animation = "go 10s linear infinite";
+		canvas_2.style.webkitAnimation = "go 10s linear infinite";
+		contents[1].style.transform = "translateY(0)";
+		contents[1].style.webkitTransform = "translateY(0)";
+		contents[1].style.animation = "drop-in 1.6s ease-out forwards 1";
+		contents[1].style.webkitAnimation = "drop-in 1.6s ease-out forwards 1";
+	},1500);
+};
+
+//home-content-2
+var time_set = document.getElementById("time-set");
+var time_1 = document.getElementById("time-1");
+var time_2 = document.getElementById("time-2");
+var time_3 = document.getElementById("time-3");
+var btn_1 = document.getElementById("btn-1");
+var btn_2 = document.getElementById("btn-2");
+var btn_3 = document.getElementById("btn-3");
+var game = document.getElementById("game");
+
+btn_1.onclick = function(){
+	time_1.style.animation = "one-drop-out 1s ease-in forwards 1";
+	time_1.style.webkitAnimation = "one-drop-out 1s ease-in forwards 1";
+	setTimeout(function(){
+		time_3.style.animation = "three-drop-out 1s ease-in forwards 1";
+		time_3.style.webkitAnimation = "three-drop-out 1s ease-in forwards 1";
+	},200);
+	setTimeout(function(){
+		time_2.style.animation = "two-drop-out 1s ease-in forwards 1";
+		time_2.style.webkitAnimation = "two-drop-out 1s ease-in forwards 1";
+	},400);
+	setTimeout(function(){
+		time_set.style.animation = "drop-out 1s ease-in forwards 1";
+		time_set.style.webkitAnimation = "drop-out 1s ease-in forwards 1";
+	},600);
+	setTimeout(function(){
+		game.style.left = "0";
+		tms = 60000;
+		setTimeout(timing(),1000);
+	},2000);
+};
+
+btn_2.onclick = function(){
+	time_2.style.animation = "two-drop-out 1s ease-in forwards 1";
+	time_2.style.webkitAnimation = "two-drop-out 1s ease-in forwards 1";
+	setTimeout(function(){
+		time_3.style.animation = "three-drop-out 1s ease-in forwards 1";
+		time_3.style.webkitAnimation = "three-drop-out 1s ease-in forwards 1";
+	},200);
+	setTimeout(function(){
+		time_1.style.animation = "one-drop-out 1s ease-in forwards 1";
+		time_1.style.webkitAnimation = "one-drop-out 1s ease-in forwards 1";
+	},400);
+	setTimeout(function(){
+		time_set.style.animation = "drop-out 1s ease-in forwards 1";
+		time_set.style.webkitAnimation = "drop-out 1s ease-in forwards 1";
+	},600);
+	setTimeout(function(){
+		game.style.left = "0";
+		tms = 180000;
+		setTimeout(timing(),1000);
+	},2000);
+};
+
+btn_3.onclick = function(){
+	time_3.style.animation = "three-drop-out 1s ease-in forwards 1";
+	time_3.style.webkitAnimation = "three-drop-out 1s ease-in forwards 1";
+	setTimeout(function(){
+		time_2.style.animation = "two-drop-out 1s ease-in forwards 1";
+		time_2.style.webkitAnimation = "two-drop-out 1s ease-in forwards 1";
+	},200);
+	setTimeout(function(){
+		time_1.style.animation = "one-drop-out 1s ease-in forwards 1";
+		time_1.style.webkitAnimation = "one-drop-out 1s ease-in forwards 1";
+	},400);
+	setTimeout(function(){
+		time_set.style.animation = "drop-out 1s ease-in forwards 1";
+		time_set.style.webkitAnimation = "drop-out 1s ease-in forwards 1";
+	},600);
+	setTimeout(function(){
+		game.style.left = "0";
+		tms = 300000;
+		setTimeout(timing(),1000);
+	},2000);
+};
+</script>
+<script>
+    	var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation,
+                func='恢复_无标题1_20161220103022';
+        function init() {
+            canvas = document.getElementById("canvas");
+            anim_container = document.getElementById("animation_container");
+            dom_overlay_container = document.getElementById("dom_overlay_container");
+            images = images||{};
+            ss = ss||{};
+            var loader = new createjs.LoadQueue(false);
+            loader.addEventListener("fileload", handleFileLoad);
+            loader.addEventListener("complete", handleComplete);
+            loader.loadManifest(lib.properties.manifest);
+        }
+        function handleFileLoad(evt) {
+            if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+        }
+        function handleComplete(evt) {
+            //This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
+            var queue = evt.target;
+            var ssMetadata = lib.ssMetadata;
+            for(i=0; i<ssMetadata.length; i++) {
+                ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+            }
+            eval('exportRoot = new lib.'+func+'();');
+            stage = new createjs.Stage(canvas);
+            stage.addChild(exportRoot);
+            //Registers the "tick" event listener.
+            fnStartAnimation = function() {
+                createjs.Ticker.setFPS(lib.properties.fps);
+                createjs.Ticker.addEventListener("tick", stage);
+            }
+            //Code to support hidpi screens and responsive scaling.
+            function makeResponsive(isResp, respDim, isScale, scaleType) {
+                var lastW, lastH, lastS=1;
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas();
+                function resizeCanvas() {
+                    var w = lib.properties.width, h = lib.properties.height;
+                    var iw = window.innerWidth, ih=window.innerHeight;
+                    var pRatio = window.devicePixelRatio || 1, xRatio=iw/w, yRatio=ih/h, sRatio=1;
+                    if(isResp) {
+                        if((respDim=='width'&&lastW==iw) || (respDim=='height'&&lastH==ih)) {
+                            sRatio = lastS;
+                        }
+                        else if(!isScale) {
+                            if(iw<w || ih<h)
+                                sRatio = Math.min(xRatio, yRatio);
+                        }
+                        else if(scaleType==1) {
+                            sRatio = Math.min(xRatio, yRatio);
+                        }
+                        else if(scaleType==2) {
+                            sRatio = Math.max(xRatio, yRatio);
+                        }
+                    }
+                    canvas.width = w*pRatio*sRatio;
+                    canvas.height = h*pRatio*sRatio;
+                    canvas.style.width = dom_overlay_container.style.width = anim_container.style.width =  w*sRatio+'px';
+                    canvas.style.height = anim_container.style.height = dom_overlay_container.style.height = h*sRatio+'px';
+                    stage.scaleX = pRatio*sRatio;
+                    stage.scaleY = pRatio*sRatio;
+                    lastW = iw; lastH = ih; lastS = sRatio;
+                }
+            }
+            makeResponsive(false,'both',false,1);
+            fnStartAnimation();
+        }
+</script>
+<script type="text/javascript" src="js/generator.js"></script>
+<script type="text/javascript" src="js/action.js"></script>
+<script>
+    x=2;y=2;
+    var path=pos_y_list[2] + '-' + pos_x_list[0];
+    walk(path);
+    path=pos_y_list[1] + '-' + pos_x_list[0];
+    walk(path);
+    path=pos_y_list[1] + '-' + pos_x_list[1];
+    walk(path);
+</script>
+</body>
+</html>
